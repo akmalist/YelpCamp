@@ -152,22 +152,16 @@ app.get("/campgrounds/new", function(req, res) {
 
 
 //SHOW -shows more info about one campground
-app.get("/campgrounds/:id", function(req,res){
-//   What this is doing is passing the value of foundCampground which is w/e campground is found by your Campground.findById  callback and you are passing it to the front end or your show partial AS campground.  So on the front end with your partial you get the data by doing
-//  <% campground.whatever %> and you will have that data on your front end.
-Campground.findByID(req.params.id, function(err, newCamp){
+app.get("/campgrounds/:id", function(req, res){
+  Campground.findById(req.params.id, function(err, foundCampground){
     if(err){
       console.log(err);
-    }else{
-      res.render("show", {camground:newCamp});
+    } else {
+      res.render("show", {campground:foundCampground});
     }
   });
-
-
-
-
-
 });
+
 
 app.listen(3000, function() {
   console.log("App is running on port 3000");
