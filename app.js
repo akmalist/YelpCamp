@@ -14,7 +14,7 @@ mongoose.connect("mongodb://localhost/yelp_camp", {
   useNewUrlParser: true
 });
 
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
   extended: true
@@ -30,63 +30,6 @@ db.once('open', function() {
 });
 
 
-
-
-
-//initial data
-
-// const campgrounds = [{
-//     name: "Salmon Creek",
-//     image: "images/salmonCreek.JPG"
-//   },
-//   {
-//     name: "Granite Hill",
-//     image: "images/graniteHill.jpg"
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "images/mountainGoat.jpg"
-//   },
-//   {
-//     name: "Salmon Creek",
-//     image: "images/salmonCreek.JPG"
-//   },
-//   {
-//     name: "Granite Hill",
-//     image: "images/graniteHill.jpg"
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "images/mountainGoat.jpg"
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "images/mountainGoat.jpg"
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "images/mountainGoat.jpg"
-//   }
-//
-//
-//
-//
-// ];
-//
-//
-// Campground.create(  {
-//     name: "Mountain Goat's Rest",
-//     image: "images/mountainGoat.jpg",
-//     description: "Great Camping place, but no water!"
-//   }, function(err,newlyCreated){
-//     if(err){
-//       console.log(err);
-//     }else{
-//       console.log("NEWLY CREATED CAMPGROUND!");
-//       console.log(newlyCreated);
-//     }
-//
-//   });
 
 app.get("/", function(req, res) {
   res.render("landing");
@@ -202,7 +145,7 @@ app.post("/campgrounds/:id/comments", function(req, res){
  });
 });
 
- 
+
 
 
 app.listen(3000, function() {
