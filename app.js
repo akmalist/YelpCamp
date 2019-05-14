@@ -31,7 +31,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// seedDB(); seed database
+// seed database
+seedDB();
+
 
 //check for mongoose db connection
 const db = mongoose.connection;
@@ -58,7 +60,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // this will call the function check if the user is loged in every route app.get or post requests
 app.use(function(req, res, next){
-  res.locals.currentUser=req.user;
+  res.locals.currentUser = req.user;
   //req.user comes from Passport
   //currentUser variable can be used in header templates
   next();
