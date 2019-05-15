@@ -12,6 +12,7 @@ middleware.isLogedin = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash("error", "You must be loged in to do that!");
   res.redirect("/login");
 };
 //another middleware to check if the user is authorized to edit campgrounds
@@ -29,7 +30,9 @@ middleware.checkOwnershipAuthorization = function(req, res, next) {
           // res.render("campgrounds/edit", {campground: foundCampground});
         } else {
           //otherwise redirect
+          req.flash("error", "You dont have permition to do that");
           res.redirect("back");
+
         }
       }
 
@@ -51,7 +54,6 @@ middleware.checkCommentOwnership = function(req, res, next) {
         //does user own the comment?
         if (foundComment.author.id.equals(req.user._id)) {
           return next();
-
         } else {
           //otherwise redirect
           res.redirect("back");
@@ -62,6 +64,7 @@ middleware.checkCommentOwnership = function(req, res, next) {
   } else {
     //otherwise redirect
     res.redirect("back");
+    req.flash("error", "You must be loged to do that");
   }
 };
 

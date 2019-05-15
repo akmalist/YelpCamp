@@ -8,6 +8,7 @@ const localStrategy = require("passport-local");
 const request = require("request");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 const Campground =require("./models/campground");
 const Comment =require("./models/comment");
 const User =require("./models/user");
@@ -30,7 +31,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
+app.use(flash());
 // seed database
 seedDB();
 
@@ -63,6 +64,9 @@ app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   //req.user comes from Passport
   //currentUser variable can be used in header templates
+  res.locals.error=req.flash("error");
+  res.locals.success=req.flash("success"); //will create a global variable error/success that can be available in every template on your app
+
   next();
 });
 
