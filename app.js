@@ -12,7 +12,7 @@ const flash = require("connect-flash");
 const Campground =require("./models/campground");
 const Comment =require("./models/comment");
 const User =require("./models/user");
-var seedDB      = require("./seeds");
+const seedDB      = require("./seeds");
 
 
 //requring routes from different folder
